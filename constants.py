@@ -11,4 +11,4 @@ apikey = "{token}"
 num_days = 5
 
 ##os.environ["IEX_API_VERSION"] = "iexcloud-sandbox"
-##os.environ["IEX_TOKEN"] = "Tpk_33b7556f888941049cc8df0d45996d1a"
+##os.environ["IEX_TOKEN"] = "{token}"
