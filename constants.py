@@ -2,12 +2,12 @@
 ## Note, it costs money to pull data from IEX
 
 #os.environ["IEX_API_VERSION"] = "iexcloud-beta"
-#os.environ["IEX_TOKEN"] = "pk_d88216e5ead04388bbdc03d609d37140"
+#os.environ["IEX_TOKEN"] = "{token}"
 
 
 stock_price_data_path = "stock_returns/"
 earnings_dates_data_path = "stock_returns/earnings_dates/"
-apikey = "T7HCWHNOIIFSRGJ0"
+apikey = "{token}"
 num_days = 5
 
 ##os.environ["IEX_API_VERSION"] = "iexcloud-sandbox"
