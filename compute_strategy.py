@@ -78,4 +78,4 @@ if __name__ == '__main__':
 	
 	returns_table = get_returns_table(tickers[0:482])
 	print(returns_table)
-	returns_table.to_csv(earnings_dates_data_path + "returns_table.csv", index=False)
+	returns_table.to_csv(earnings_dates_data_path + "returns_table.csv", index_label = 'ticker')
