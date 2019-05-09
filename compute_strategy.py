@@ -13,14 +13,15 @@ def get_pre_earnings_trading_returns(ticker):
 	AMC = After Market Close
 	'''
 	
+	return_rates = []
+
 	try:
 		price_data = pd.read_csv(stock_price_data_path + ticker + ".csv", parse_dates=['timestamp'])
 		earnings = earnings_dates[earnings_dates['ticker'] == ticker]
 	except:
-		print(ticker + " Error")
-		return []	
-
-	return_rates = []
+		print(ticker + " Error reading in price data")
+		error_tickers.append(ticker)
+		return return_rates	
 
 	for row in earnings.itertuples():
 		earnings_date = row[2] # get back earnings date
@@ -41,7 +42,8 @@ def get_pre_earnings_trading_returns(ticker):
 			return_rate = (window['close'][begin_index] / window['open'][end_index-1]) - 1
 			return_rates.append(return_rate)
 		except (IndexError, ValueError) as error:
-			print(ticker + " Error")
+			print(ticker + " Error pulling price data subset")
+			error_tickers.append(ticker)
 			break
 
 	return return_rates
@@ -73,9 +75,12 @@ def get_returns_table(tickers):
 	return returns_table
 
 if __name__ == '__main__':
+	error_tickers = []
+
 	earnings_dates = pd.read_csv(earnings_dates_data_path + "earnings_dates.csv", parse_dates=["earnings_date"])
 	tickers = list(earnings_dates['ticker'].unique())
 	
-	returns_table = get_returns_table(tickers[0:482])
+	returns_table = get_returns_table(tickers)
 	print(returns_table)
+	print(error_tickers)
 	returns_table.to_csv(earnings_dates_data_path + "returns_table.csv", index_label = 'ticker')
